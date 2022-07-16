@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:red_pandadoro/application/theme/theme_service.dart';
+import 'package:red_pandadoro/presentation/main_menu_drawer.dart';
 import 'package:red_pandadoro/theme.dart';
 
 import 'package:provider/provider.dart';
@@ -27,6 +28,7 @@ class MyApp extends StatelessWidget {
     return Consumer<ThemeService>(
       builder: (context, themeService, child) {
         return MaterialApp(
+          debugShowCheckedModeBanner: false,
           title: 'Flutter Demo',
           theme: AppTheme.lightTheme,
           darkTheme: AppTheme.darkTheme,
@@ -35,7 +37,7 @@ class MyApp extends StatelessWidget {
               : themeService.isDarkmodeOn
                   ? ThemeMode.dark
                   : ThemeMode.light,
-          home: const MyHomePage(title: 'Flutter Demo Home Page'),
+          home: const MyHomePage(title: 'Red Pandadoro'),
         );
       },
     );
@@ -62,6 +64,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+  int _selectedDestination = 0;
 
   void _incrementCounter() {
     setState(() {
@@ -76,6 +79,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final themeData =
+        Theme.of(context).copyWith(canvasColor: Colors.blueGrey.shade800);
+
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
     //
@@ -87,6 +93,9 @@ class _MyHomePageState extends State<MyHomePage> {
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
+      ),
+      endDrawer: const Drawer(
+        child: MainMenuDrawer(),
       ),
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
@@ -108,12 +117,20 @@ class _MyHomePageState extends State<MyHomePage> {
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+            Container(
+              decoration: BoxDecoration(color: themeData.colorScheme.secondary),
+              child: const SizedBox(
+                height: 100,
+                width: 300,
+                child: Text(
+                  'You have pushed the button this many times:',
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
             ),
             Text(
               '$_counter',
-              style: Theme.of(context).textTheme.headline4,
+              style: Theme.of(context).textTheme.headline1,
             ),
           ],
         ),
@@ -121,7 +138,10 @@ class _MyHomePageState extends State<MyHomePage> {
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
         tooltip: 'Increment',
-        child: const Icon(Icons.add),
+        child: const Icon(
+          Icons.add,
+          color: Colors.white,
+        ),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
