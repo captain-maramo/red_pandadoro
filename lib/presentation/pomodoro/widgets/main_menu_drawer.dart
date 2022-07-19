@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class MainMenuDrawer extends StatelessWidget {
-  const MainMenuDrawer({
-    Key? key,
-  }) : super(key: key);
+import '../../../application/theme/theme_service.dart';
+
+class MainMenuDrawer extends StatefulWidget {
+  const MainMenuDrawer({Key? key}) : super(key: key);
 
   @override
+  State<MainMenuDrawer> createState() => _MainMenuDrawerState();
+}
+
+class _MainMenuDrawerState extends State<MainMenuDrawer> {
+  @override
   Widget build(BuildContext context) {
+    final themeData = Theme.of(context);
     return Column(
       // Important: Remove any padding from the ListView.
       children: <Widget>[
@@ -27,9 +34,10 @@ class MainMenuDrawer extends StatelessWidget {
               Align(
                 alignment: const Alignment(0.9, 0.9),
                 child: IconButton(
-                  icon: const Icon(
+                  icon: Icon(
                     Icons.close,
                     size: 32,
+                    color: themeData.iconTheme.color,
                   ),
                   onPressed: () {
                     Navigator.of(context).pop();
@@ -44,26 +52,18 @@ class MainMenuDrawer extends StatelessWidget {
           thickness: 1,
         ),
         ListTile(
-          iconColor: Colors.white,
-          textColor: Colors.white,
-          selectedColor: Colors.white,
-          leading: const Icon(Icons.add),
+          leading: Icon(Icons.add, color: themeData.iconTheme.color),
           title: const Text('Add New Task'),
           onTap: () {},
         ),
         ListTile(
-          iconColor: Colors.white,
-          textColor: Colors.white,
-          selectedColor: Colors.white,
-          leading: const Icon(Icons.format_list_bulleted),
+          leading: Icon(Icons.format_list_bulleted,
+              color: themeData.iconTheme.color),
           title: const Text('Show Task List'),
           onTap: () {},
         ),
         ListTile(
-          iconColor: Colors.white,
-          textColor: Colors.white,
-          selectedColor: Colors.white,
-          leading: const Icon(Icons.checklist),
+          leading: Icon(Icons.checklist, color: themeData.iconTheme.color),
           title: const Text('Finished Tasks'),
           onTap: () {},
         ),
@@ -83,11 +83,21 @@ class MainMenuDrawer extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(16.0),
           child: IconButton(
-            icon: const Icon(
-              Icons.light_mode_outlined,
-              size: 40,
-            ),
-            onPressed: () {},
+            icon: Provider.of<ThemeService>(context, listen: false).isDarkmodeOn
+                ? const Icon(
+                    Icons.light_mode_outlined,
+                    size: 40,
+                  )
+                : const Icon(
+                    Icons.dark_mode_outlined,
+                    size: 40,
+                  ),
+            onPressed: () {
+              setState(() {
+                Provider.of<ThemeService>(context, listen: false)
+                    .toggleThemeMode();
+              });
+            },
           ),
         ),
       ],
