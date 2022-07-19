@@ -32,9 +32,16 @@ class AppTheme {
       fontWeight: FontWeight.bold,
       fontSize: 16);
 
+  static const TextStyle _lightTodoText = TextStyle(
+      color: _lightTextColorPrimary,
+      fontFamily: "RobotoCondensed",
+      fontWeight: FontWeight.normal,
+      fontSize: 36);
+
   static const TextTheme _lightTextTheme = TextTheme(
     headline1: _lightHeadingText,
     bodyText1: _lightBodyText,
+    button: _lightTodoText,
   );
 
   static final TextStyle _darkThemeHeadingTextStyle =

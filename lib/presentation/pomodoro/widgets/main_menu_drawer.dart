@@ -7,8 +7,6 @@ class MainMenuDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final themeData = Theme.of(context);
-
     return Column(
       // Important: Remove any padding from the ListView.
       children: <Widget>[
