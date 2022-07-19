@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'widgets/main_menu_drawer.dart';
 import 'widgets/main_screen_body.dart';
+import 'widgets/todo_bottom_nav_bar.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key, required this.title}) : super(key: key);
@@ -24,24 +25,7 @@ class _MainScreenState extends State<MainScreen> {
         child: MainMenuDrawer(),
       ),
       body: MainScreenBody(themeData: themeData),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.add),
-            label: 'Add',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.list),
-            label: 'List',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.school),
-            label: 'Done',
-          ),
-        ],
-        currentIndex: 0,
-        onTap: (__) {},
-      ),
+      bottomNavigationBar: const TodoBottomNavBar(),
     );
   }
 }

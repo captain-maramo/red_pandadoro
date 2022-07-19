@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'button_row.dart';
-import 'four_pomodoro_prgogress_painter.dart';
-import 'progress_circle_button.dart';
-import 'todo_field.dart';
+import 'main_button_row.dart';
+import 'main_four_pomodoro_prgogress_painter.dart';
+import 'main_progress_circle_button.dart';
+import 'main_todo_field.dart';
 
 class MainScreenBody extends StatelessWidget {
   const MainScreenBody({

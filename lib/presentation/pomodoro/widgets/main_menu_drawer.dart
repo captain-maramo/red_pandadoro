@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../application/theme/theme_service.dart';
+import '../todo_list_screen.dart';
 
 class MainMenuDrawer extends StatefulWidget {
   const MainMenuDrawer({Key? key}) : super(key: key);
@@ -60,7 +61,12 @@ class _MainMenuDrawerState extends State<MainMenuDrawer> {
           leading: Icon(Icons.format_list_bulleted,
               color: themeData.iconTheme.color),
           title: const Text('Show Task List'),
-          onTap: () {},
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const TodoListScreen()),
+            );
+          },
         ),
         ListTile(
           leading: Icon(Icons.checklist, color: themeData.iconTheme.color),

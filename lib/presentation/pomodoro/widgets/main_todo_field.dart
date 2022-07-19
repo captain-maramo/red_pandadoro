@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:red_pandadoro/presentation/pomodoro/todo_list_screen.dart';
 
 class ToDoField extends StatelessWidget {
   const ToDoField({
@@ -22,11 +23,22 @@ class ToDoField extends StatelessWidget {
             height: 120,
             width: 300,
             child: Center(
-              child: Text(
-                'Click to choose task',
-                textAlign: TextAlign.center,
-                style:
-                    Theme.of(context).textTheme.button?.copyWith(fontSize: 36),
+              child: TextButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const TodoListScreen()),
+                  );
+                },
+                child: Text(
+                  'Click to choose task',
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context)
+                      .textTheme
+                      .button
+                      ?.copyWith(fontSize: 36),
+                ),
               ),
             ),
           ),
