@@ -82,7 +82,7 @@ class _MainMenuDrawerState extends State<MainMenuDrawer> {
             builder: (BuildContext context) => AlertDialog(
               backgroundColor: themeData.primaryColorDark,
               elevation: 12,
-              shape: RoundedRectangleBorder(
+              shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(8.0))),
               content: TextButton(
                   onPressed: () => Navigator.pop(context, 'OK'),
