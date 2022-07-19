@@ -77,7 +77,22 @@ class _MainMenuDrawerState extends State<MainMenuDrawer> {
             Icons.info_outline,
             size: 40,
           ),
-          onPressed: () {},
+          onPressed: () => showDialog<String>(
+            context: context,
+            builder: (BuildContext context) => AlertDialog(
+              backgroundColor: themeData.primaryColorDark,
+              elevation: 12,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(8.0))),
+              content: TextButton(
+                  onPressed: () => Navigator.pop(context, 'OK'),
+                  child: Text(
+                    'Version 0.0.1\nAuthor Mark Morgan',
+                    textAlign: TextAlign.center,
+                    style: themeData.textTheme.caption,
+                  )),
+            ),
+          ),
         ),
         const Spacer(),
         Padding(

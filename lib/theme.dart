@@ -20,6 +20,7 @@ class AppTheme {
   static const Color _darkSelectedIconColor = Color.fromRGBO(46, 125, 50, 1);
 
   static final ThemeData lightTheme = ThemeData(
+    primaryColorDark: _lightPrimaryColorDark,
     canvasColor: _lightPrimaryColor,
     scaffoldBackgroundColor: _lightPrimaryColor,
     iconTheme: const IconThemeData(
@@ -48,6 +49,7 @@ class AppTheme {
   );
 
   static final ThemeData darkTheme = ThemeData(
+    primaryColorDark: _darkPrimaryColorDark,
     canvasColor: _darkPrimaryColor,
     scaffoldBackgroundColor: _darkPrimaryColor,
     iconTheme: const IconThemeData(
@@ -97,11 +99,18 @@ class AppTheme {
     fontSize: 36,
   );
 
-  static const TextTheme _lightTextTheme = TextTheme(
-    headline1: _lightHeadingText,
-    bodyText1: _lightBodyText,
-    button: _lightTodoText,
+  static const TextStyle _lightInfo = TextStyle(
+    color: _lightTextColorPrimary,
+    fontFamily: "RobotoCondensed",
+    fontWeight: FontWeight.normal,
+    fontSize: 24,
   );
+
+  static const TextTheme _lightTextTheme = TextTheme(
+      headline1: _lightHeadingText,
+      bodyText1: _lightBodyText,
+      button: _lightTodoText,
+      caption: _lightInfo);
 
   static const TextStyle _darkHeadingText = TextStyle(
     color: _darkTextColorPrimary,
@@ -125,9 +134,16 @@ class AppTheme {
     fontSize: 36,
   );
 
-  static const TextTheme _darkTextTheme = TextTheme(
-    headline1: _darkHeadingText,
-    bodyText1: _darkBodyText,
-    button: _darkTodoText,
+  static const TextStyle _darkInfo = TextStyle(
+    color: _darkTextColorPrimary,
+    fontFamily: "RobotoCondensed",
+    fontWeight: FontWeight.normal,
+    fontSize: 24,
   );
+
+  static const TextTheme _darkTextTheme = TextTheme(
+      headline1: _darkHeadingText,
+      bodyText1: _darkBodyText,
+      button: _darkTodoText,
+      caption: _darkInfo);
 }
