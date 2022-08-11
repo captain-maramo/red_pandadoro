@@ -3,16 +3,16 @@ import 'package:flutter/material.dart';
 import 'widgets/main_menu_drawer.dart';
 import 'widgets/todo_bottom_nav_bar.dart';
 
-class TodoListScreen extends StatefulWidget {
-  const TodoListScreen({Key? key, required this.title}) : super(key: key);
+class AddTodoScreen extends StatefulWidget {
+  const AddTodoScreen({Key? key, required this.title}) : super(key: key);
 
   final String title;
 
   @override
-  State<TodoListScreen> createState() => _TodoListScreenState();
+  State<AddTodoScreen> createState() => _AddTodoScreenState();
 }
 
-class _TodoListScreenState extends State<TodoListScreen> {
+class _AddTodoScreenState extends State<AddTodoScreen> {
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
@@ -23,7 +23,14 @@ class _TodoListScreenState extends State<TodoListScreen> {
       endDrawer: const Drawer(
         child: MainMenuDrawer(),
       ),
-      body: const Placeholder(),
+      body: Column(children: [
+        TextFormField(
+          decoration: const InputDecoration(
+            border: UnderlineInputBorder(),
+            labelText: 'Enter your username',
+          ),
+        ),
+      ]),
       bottomNavigationBar: const TodoBottomNavBar(),
     );
   }

@@ -25,7 +25,6 @@ class _MainScreenState extends State<MainScreen> {
         child: MainMenuDrawer(),
       ),
       body: MainScreenBody(themeData: themeData),
-      bottomNavigationBar: const TodoBottomNavBar(),
     );
   }
 }

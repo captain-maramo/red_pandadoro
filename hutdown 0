@@ -1,0 +1,53 @@
+[33mcommit 2c266324d1c039a53ec42c56cb68c46aba619747[m[33m ([m[1;36mHEAD -> [m[1;32mtaskListRoute[m[33m)[m
+Author: Captain Maramo <captain_maramo@pop-os.localdomain>
+Date:   Wed Jul 20 01:39:00 2022 +0200
+
+    added todolistroute to drawer and todobutton and sorted files in presentation layer
+
+[33mcommit f271659ff2936a96aecf5b05c033463e88de3028[m[33m ([m[1;32mmain[m[33m)[m
+Author: Captain Maramo <captain_maramo@pop-os.localdomain>
+Date:   Wed Jul 20 01:23:06 2022 +0200
+
+    added const modifiers
+
+[33mcommit 801ceb34744f9174be80cbc0fd8f2e8a2af92196[m
+Author: Captain Maramo <captain_maramo@pop-os.localdomain>
+Date:   Wed Jul 20 01:21:24 2022 +0200
+
+    added info Button functions
+
+[33mcommit b54b429e53f30c7570df044ae792fd39e8bfcd9a[m
+Author: Captain Maramo <captain_maramo@pop-os.localdomain>
+Date:   Tue Jul 19 23:41:24 2022 +0200
+
+    finished theme
+
+[33mcommit 4924074a512a3ab693cbbb1d3b7fd6b45b1aebff[m
+Author: Captain Maramo <captain_maramo@pop-os.localdomain>
+Date:   Tue Jul 19 16:48:04 2022 +0200
+
+    first version of mainpage
+
+[33mcommit eb3b4a95dd244e122e6f7c2473fd150a342a00b5[m
+Author: Captain Maramo <captain_maramo@pop-os.localdomain>
+Date:   Sun Jul 17 01:54:22 2022 +0200
+
+    implemented drawer and extracted it to an extra widget file
+
+[33mcommit 725c29b84662bbd5a59ba5b98e6cdf2347aaef4a[m
+Author: Captain Maramo <captain_maramo@pop-os.localdomain>
+Date:   Thu Jul 14 22:29:15 2022 +0200
+
+    added fonts
+
+[33mcommit d3688beec8d56b39ab7e1ec0b7dfe7694ccfdcec[m
+Author: Captain Maramo <captain_maramo@pop-os.localdomain>
+Date:   Thu Jul 14 22:17:50 2022 +0200
+
+    added ThemeService to implement light and darkTheme via theme.dart file
+
+[33mcommit c6ede38fc289819bc469e04d066f162300ddf66b[m
+Author: Captain Maramo <captain_maramo@pop-os.localdomain>
+Date:   Wed Jul 13 16:27:32 2022 +0200
+
+    initial commit

@@ -28,7 +28,8 @@ class ToDoField extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const TodoListScreen()),
+                        builder: (context) =>
+                            const TodoListScreen(title: 'Red Pandadoro')),
                   );
                 },
                 child: Text(

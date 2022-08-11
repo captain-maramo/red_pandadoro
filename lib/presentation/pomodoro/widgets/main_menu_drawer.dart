@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:red_pandadoro/presentation/pomodoro/add_todo_screen.dart';
+import 'package:red_pandadoro/presentation/pomodoro/finished_todo_screen.dart';
 
 import '../../../application/theme/theme_service.dart';
 import '../todo_list_screen.dart';
@@ -55,7 +57,14 @@ class _MainMenuDrawerState extends State<MainMenuDrawer> {
         ListTile(
           leading: Icon(Icons.add, color: themeData.iconTheme.color),
           title: const Text('Add New Task'),
-          onTap: () {},
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                      const AddTodoScreen(title: 'Red Pandadoro')),
+            );
+          },
         ),
         ListTile(
           leading: Icon(Icons.format_list_bulleted,
@@ -64,14 +73,23 @@ class _MainMenuDrawerState extends State<MainMenuDrawer> {
           onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const TodoListScreen()),
+              MaterialPageRoute(
+                  builder: (context) =>
+                      const TodoListScreen(title: 'Red Pandadoro')),
             );
           },
         ),
         ListTile(
           leading: Icon(Icons.checklist, color: themeData.iconTheme.color),
           title: const Text('Finished Tasks'),
-          onTap: () {},
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                      const FinishedTodoScreen(title: 'Red Pandadoro')),
+            );
+          },
         ),
         const Divider(
           height: 1,
