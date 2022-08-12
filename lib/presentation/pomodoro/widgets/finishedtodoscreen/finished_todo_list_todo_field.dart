@@ -3,8 +3,8 @@ import 'package:hive_flutter/hive_flutter.dart';
 
 import '../../../../infrastructure/models/todo.dart';
 
-class TodoListScreenToDoField extends StatelessWidget {
-  const TodoListScreenToDoField(
+class FinishedTodoListScreenToDoField extends StatelessWidget {
+  const FinishedTodoListScreenToDoField(
       {Key? key,
       required this.themeData,
       required this.box,
@@ -89,7 +89,7 @@ class TodoListScreenToDoField extends StatelessWidget {
                               box.put(todoKey, todo);
                             },
                             child: Text(
-                              "done",
+                              "undo",
                               textAlign: TextAlign.center,
                               style: Theme.of(context)
                                   .textTheme

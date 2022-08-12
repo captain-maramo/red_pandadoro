@@ -21,31 +21,6 @@ Future<void> main() async {
   await Hive.initFlutter();
   Hive.registerAdapter<Todo>(TodoAdapter());
   box = await Hive.openBox<Todo>('todoBox');
-  box.add(Todo(
-      taskName: "task 1",
-      estimatedPomodoros: 0,
-      finishedPomodoros: 0,
-      done: false));
-  box.add(Todo(
-      taskName: "task 2",
-      estimatedPomodoros: 0,
-      finishedPomodoros: 0,
-      done: false));
-  box.add(Todo(
-      taskName: "task 3",
-      estimatedPomodoros: 0,
-      finishedPomodoros: 0,
-      done: false));
-  box.add(Todo(
-      taskName: "task 4",
-      estimatedPomodoros: 0,
-      finishedPomodoros: 0,
-      done: false));
-  box.add(Todo(
-      taskName: "task 5",
-      estimatedPomodoros: 0,
-      finishedPomodoros: 0,
-      done: false));
 
   runApp(
     ChangeNotifierProvider(

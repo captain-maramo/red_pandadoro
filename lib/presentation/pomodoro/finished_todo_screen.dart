@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:red_pandadoro/main.dart';
+import 'package:red_pandadoro/presentation/pomodoro/widgets/finishedtodoscreen/finished_todo_list_screen_body.dart';
 
 import 'widgets/menu_drawer.dart';
 import 'widgets/todo_bottom_nav_bar.dart';
@@ -18,6 +20,7 @@ class FinishedTodoScreen extends StatefulWidget {
 class _FinishedTodoScreenState extends State<FinishedTodoScreen> {
   @override
   Widget build(BuildContext context) {
+    final themeData = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -27,7 +30,10 @@ class _FinishedTodoScreenState extends State<FinishedTodoScreen> {
           box: widget.box,
         ),
       ),
-      body: const Placeholder(),
+      body: FinishedTodoScreenBody(
+        box: box,
+        themeData: themeData,
+      ),
       bottomNavigationBar: const TodoBottomNavBar(),
     );
   }
