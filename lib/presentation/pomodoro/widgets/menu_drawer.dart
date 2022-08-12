@@ -61,6 +61,7 @@ class _MenuDrawerState extends State<MenuDrawer> {
           leading: Icon(Icons.add, color: themeData.iconTheme.color),
           title: const Text('Add New Task'),
           onTap: () {
+            Navigator.of(context).popUntil((route) => route.isFirst);
             Navigator.push(
               context,
               MaterialPageRoute(
@@ -76,6 +77,7 @@ class _MenuDrawerState extends State<MenuDrawer> {
               color: themeData.iconTheme.color),
           title: const Text('Show Task List'),
           onTap: () {
+            Navigator.of(context).popUntil((route) => route.isFirst);
             Navigator.push(
               context,
               MaterialPageRoute(
@@ -88,6 +90,7 @@ class _MenuDrawerState extends State<MenuDrawer> {
           leading: Icon(Icons.checklist, color: themeData.iconTheme.color),
           title: const Text('Finished Tasks'),
           onTap: () {
+            Navigator.of(context).popUntil((route) => route.isFirst);
             Navigator.push(
               context,
               MaterialPageRoute(
