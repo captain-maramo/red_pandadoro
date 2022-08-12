@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:red_pandadoro/presentation/pomodoro/todo_list_screen.dart';
 
-class ToDoField extends StatelessWidget {
-  const ToDoField({
-    Key? key,
-    required this.themeData,
-  }) : super(key: key);
+class MainScreenToDoField extends StatelessWidget {
+  const MainScreenToDoField(
+      {Key? key, required this.themeData, required this.box})
+      : super(key: key);
 
   final ThemeData themeData;
+  final Box box;
 
   @override
   Widget build(BuildContext context) {
@@ -28,8 +29,10 @@ class ToDoField extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) =>
-                            const TodoListScreen(title: 'Red Pandadoro')),
+                        builder: (context) => TodoListScreen(
+                              title: 'Red Pandadoro',
+                              box: box,
+                            )),
                   );
                 },
                 child: Text(

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 import 'package:red_pandadoro/application/theme/theme_service.dart';
+import 'package:red_pandadoro/infrastructure/models/todo.dart';
 import 'package:red_pandadoro/theme.dart';
 
 import 'package:provider/provider.dart';
@@ -8,20 +10,55 @@ import 'injection.dart' as di; // di == dependency injection
 
 import 'presentation/pomodoro/main_screen.dart';
 
-void main() async {
+late Box box;
+
+void testDataToBox() {}
+
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await di.init();
   await di.sl<ThemeService>().initMode();
+  await Hive.initFlutter();
+  Hive.registerAdapter<Todo>(TodoAdapter());
+  box = await Hive.openBox<Todo>('todoBox');
+  box.add(Todo(
+      taskName: "task 1",
+      estimatedPomodoros: 0,
+      finishedPomodoros: 0,
+      done: false));
+  box.add(Todo(
+      taskName: "task 2",
+      estimatedPomodoros: 0,
+      finishedPomodoros: 0,
+      done: false));
+  box.add(Todo(
+      taskName: "task 3",
+      estimatedPomodoros: 0,
+      finishedPomodoros: 0,
+      done: false));
+  box.add(Todo(
+      taskName: "task 4",
+      estimatedPomodoros: 0,
+      finishedPomodoros: 0,
+      done: false));
+  box.add(Todo(
+      taskName: "task 5",
+      estimatedPomodoros: 0,
+      finishedPomodoros: 0,
+      done: false));
+
   runApp(
     ChangeNotifierProvider(
       create: (context) => di.sl<ThemeService>(),
-      child: const MyApp(),
+      child: MyApp(box: box),
     ),
   );
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({Key? key, required this.box}) : super(key: key);
+
+  final Box box;
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +74,10 @@ class MyApp extends StatelessWidget {
               : themeService.isDarkmodeOn
                   ? ThemeMode.dark
                   : ThemeMode.light,
-          home: const MainScreen(title: 'Red Pandadoro'),
+          home: MainScreen(
+            title: "Red Pandadoro",
+            box: box,
+          ),
         );
       },
     );

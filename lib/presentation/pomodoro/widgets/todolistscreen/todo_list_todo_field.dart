@@ -1,0 +1,88 @@
+import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+
+import '../../../../infrastructure/models/todo.dart';
+
+class TodoListScreenToDoField extends StatelessWidget {
+  const TodoListScreenToDoField(
+      {Key? key,
+      required this.themeData,
+      required this.box,
+      required this.todo,
+      required this.todoKey})
+      : super(key: key);
+
+  final ThemeData themeData;
+  final Box box;
+  final Todo todo;
+  final dynamic todoKey;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsetsDirectional.all(16.0),
+      child: Material(
+        elevation: 16,
+        child: Container(
+          decoration: BoxDecoration(
+              color: themeData.colorScheme.secondary,
+              borderRadius: BorderRadius.circular(8)),
+          child: SizedBox(
+            height: 120,
+            width: 300,
+            child: Row(
+              children: [
+                SizedBox(
+                  height: 120,
+                  width: 200,
+                  child: Center(
+                    child: TextButton(
+                      onPressed: () {
+                        box.add(Todo(
+                          done: false,
+                          estimatedPomodoros: 1,
+                          finishedPomodoros: 0,
+                          taskName: 'Buttonpressed',
+                        ));
+                      },
+                      child: Text(
+                        todo.taskName,
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context)
+                            .textTheme
+                            .button
+                            ?.copyWith(fontSize: 36),
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 5),
+                  child: SizedBox(
+                    height: 120,
+                    width: 95,
+                    child: Center(
+                      child: TextButton(
+                        onPressed: () {
+                          box.delete(todoKey);
+                        },
+                        child: Text(
+                          "delete",
+                          textAlign: TextAlign.center,
+                          style: Theme.of(context)
+                              .textTheme
+                              .button
+                              ?.copyWith(fontSize: 36),
+                        ),
+                      ),
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}

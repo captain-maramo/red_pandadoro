@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
-import 'widgets/main_menu_drawer.dart';
+import 'widgets/menu_drawer.dart';
 import 'widgets/todo_bottom_nav_bar.dart';
 
 class FinishedTodoScreen extends StatefulWidget {
-  const FinishedTodoScreen({Key? key, required this.title}) : super(key: key);
+  const FinishedTodoScreen({Key? key, required this.title, required this.box})
+      : super(key: key);
 
   final String title;
+  final Box box;
 
   @override
   State<FinishedTodoScreen> createState() => _FinishedTodoScreenState();
@@ -15,13 +18,14 @@ class FinishedTodoScreen extends StatefulWidget {
 class _FinishedTodoScreenState extends State<FinishedTodoScreen> {
   @override
   Widget build(BuildContext context) {
-    final themeData = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      endDrawer: const Drawer(
-        child: MainMenuDrawer(),
+      endDrawer: Drawer(
+        child: MenuDrawer(
+          box: widget.box,
+        ),
       ),
       body: const Placeholder(),
       bottomNavigationBar: const TodoBottomNavBar(),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
 import 'package:red_pandadoro/presentation/pomodoro/add_todo_screen.dart';
 import 'package:red_pandadoro/presentation/pomodoro/finished_todo_screen.dart';
@@ -6,14 +7,16 @@ import 'package:red_pandadoro/presentation/pomodoro/finished_todo_screen.dart';
 import '../../../application/theme/theme_service.dart';
 import '../todo_list_screen.dart';
 
-class MainMenuDrawer extends StatefulWidget {
-  const MainMenuDrawer({Key? key}) : super(key: key);
+class MenuDrawer extends StatefulWidget {
+  const MenuDrawer({Key? key, required this.box}) : super(key: key);
+
+  final Box box;
 
   @override
-  State<MainMenuDrawer> createState() => _MainMenuDrawerState();
+  State<MenuDrawer> createState() => _MenuDrawerState();
 }
 
-class _MainMenuDrawerState extends State<MainMenuDrawer> {
+class _MenuDrawerState extends State<MenuDrawer> {
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
@@ -61,8 +64,10 @@ class _MainMenuDrawerState extends State<MainMenuDrawer> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) =>
-                      const AddTodoScreen(title: 'Red Pandadoro')),
+                  builder: (context) => AddTodoScreen(
+                        title: 'Red Pandadoro',
+                        box: widget.box,
+                      )),
             );
           },
         ),
@@ -75,7 +80,7 @@ class _MainMenuDrawerState extends State<MainMenuDrawer> {
               context,
               MaterialPageRoute(
                   builder: (context) =>
-                      const TodoListScreen(title: 'Red Pandadoro')),
+                      TodoListScreen(title: 'Red Pandadoro', box: widget.box)),
             );
           },
         ),
@@ -86,8 +91,10 @@ class _MainMenuDrawerState extends State<MainMenuDrawer> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) =>
-                      const FinishedTodoScreen(title: 'Red Pandadoro')),
+                  builder: (context) => FinishedTodoScreen(
+                        title: 'Red Pandadoro',
+                        box: widget.box,
+                      )),
             );
           },
         ),
