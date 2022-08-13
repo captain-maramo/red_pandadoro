@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:red_pandadoro/presentation/pomodoro/edit_todo_screen.dart';
 
 import '../../../../infrastructure/models/todo.dart';
 
@@ -69,43 +70,79 @@ class _TodoListScreenToDoFieldState extends State<TodoListScreenToDoField> {
                   padding: const EdgeInsets.only(left: 5),
                   child: Column(
                     children: [
-                      SizedBox(
-                        height: 60,
-                        width: 95,
-                        child: Center(
-                          child: TextButton(
-                            onPressed: () {
-                              widget.box.delete(widget.todoKey);
-                              widget.notifyParent();
-                            },
-                            child: Text(
-                              "clear",
-                              textAlign: TextAlign.center,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .button
-                                  ?.copyWith(fontSize: 36),
+                      Center(
+                        child: SizedBox(
+                          height: 60,
+                          width: 95,
+                          child: Center(
+                            child: IconButton(
+                              icon: const Icon(Icons.check_outlined),
+                              iconSize: 55,
+                              onPressed: () {
+                                widget.todo.done = !widget.todo.done;
+                                widget.box.put(widget.todoKey, widget.todo);
+                                widget.notifyParent();
+                              },
                             ),
                           ),
                         ),
                       ),
-                      SizedBox(
-                        height: 60,
-                        width: 95,
-                        child: Center(
-                          child: TextButton(
-                            onPressed: () {
-                              widget.todo.done = !widget.todo.done;
-                              widget.box.put(widget.todoKey, widget.todo);
-                              widget.notifyParent();
-                            },
-                            child: Text(
-                              "done",
-                              textAlign: TextAlign.center,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .button
-                                  ?.copyWith(fontSize: 36),
+                      Center(
+                        child: SizedBox(
+                          height: 60,
+                          width: 95,
+                          child: Center(
+                            child: IconButton(
+                              onPressed: () => showDialog<String>(
+                                context: context,
+                                builder: (BuildContext context) => AlertDialog(
+                                  title: const Text('AlertDialog Title'),
+                                  content:
+                                      const Text('AlertDialog description'),
+                                  actions: <Widget>[
+                                    TextButton(
+                                      onPressed: () {
+                                        widget.box.delete(widget.todoKey);
+                                        widget.notifyParent();
+                                        Navigator.pop(context, 'Delete');
+                                      },
+                                      child: Text(
+                                        'Delete',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .button
+                                            ?.copyWith(fontSize: 20),
+                                      ),
+                                    ),
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.pop(context, 'Edit');
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  EditTodoScreen(
+                                                    title: 'Red Pandadoro',
+                                                    box: widget.box,
+                                                    todokey: widget.todoKey,
+                                                    notifyParent:
+                                                        widget.notifyParent,
+                                                  )),
+                                        );
+                                      },
+                                      child: Text(
+                                        'Edit',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .button
+                                            ?.copyWith(fontSize: 20),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              icon: const Icon(Icons.more_vert),
+                              iconSize: 55,
                             ),
                           ),
                         ),
