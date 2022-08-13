@@ -4,7 +4,7 @@ import 'package:red_pandadoro/presentation/pomodoro/widgets/finishedtodoscreen/f
 
 import '../../../../infrastructure/models/todo.dart';
 
-class FinishedTodoScreenBody extends StatelessWidget {
+class FinishedTodoScreenBody extends StatefulWidget {
   const FinishedTodoScreenBody(
       {Key? key, required this.themeData, required this.box})
       : super(key: key);
@@ -13,19 +13,29 @@ class FinishedTodoScreenBody extends StatelessWidget {
   final Box box;
 
   @override
+  State<FinishedTodoScreenBody> createState() => _FinishedTodoScreenBodyState();
+}
+
+class _FinishedTodoScreenBodyState extends State<FinishedTodoScreenBody> {
+  refresh() {
+    setState(() {});
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Center(
       child: ListView.builder(
-          itemCount: box.length,
+          itemCount: widget.box.length,
           itemBuilder: (BuildContext context, int index) {
-            Todo now = box.getAt(index);
+            Todo now = widget.box.getAt(index);
             return !now.done
                 ? Container()
                 : FinishedTodoListScreenToDoField(
-                    themeData: themeData,
-                    box: box,
-                    todo: box.getAt(index),
-                    todoKey: box.keyAt(index),
+                    themeData: widget.themeData,
+                    box: widget.box,
+                    todo: widget.box.getAt(index),
+                    todoKey: widget.box.keyAt(index),
+                    notifyParent: refresh,
                   );
           }),
     );

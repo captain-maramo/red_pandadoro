@@ -3,20 +3,29 @@ import 'package:hive_flutter/hive_flutter.dart';
 
 import '../../../../infrastructure/models/todo.dart';
 
-class FinishedTodoListScreenToDoField extends StatelessWidget {
+class FinishedTodoListScreenToDoField extends StatefulWidget {
   const FinishedTodoListScreenToDoField(
       {Key? key,
       required this.themeData,
       required this.box,
       required this.todo,
-      required this.todoKey})
+      required this.todoKey,
+      required this.notifyParent})
       : super(key: key);
 
   final ThemeData themeData;
   final Box box;
   final Todo todo;
   final dynamic todoKey;
+  final Function() notifyParent;
 
+  @override
+  State<FinishedTodoListScreenToDoField> createState() =>
+      _FinishedTodoListScreenToDoFieldState();
+}
+
+class _FinishedTodoListScreenToDoFieldState
+    extends State<FinishedTodoListScreenToDoField> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -25,7 +34,7 @@ class FinishedTodoListScreenToDoField extends StatelessWidget {
         elevation: 16,
         child: Container(
           decoration: BoxDecoration(
-              color: themeData.colorScheme.secondary,
+              color: widget.themeData.colorScheme.secondary,
               borderRadius: BorderRadius.circular(8)),
           child: SizedBox(
             height: 120,
@@ -38,15 +47,16 @@ class FinishedTodoListScreenToDoField extends StatelessWidget {
                   child: Center(
                     child: TextButton(
                       onPressed: () {
-                        box.add(Todo(
+                        widget.box.add(Todo(
                           done: false,
                           estimatedPomodoros: 1,
                           finishedPomodoros: 0,
                           taskName: 'Buttonpressed',
                         ));
+                        widget.notifyParent();
                       },
                       child: Text(
-                        todo.taskName,
+                        widget.todo.taskName,
                         textAlign: TextAlign.center,
                         style: Theme.of(context)
                             .textTheme
@@ -66,7 +76,8 @@ class FinishedTodoListScreenToDoField extends StatelessWidget {
                         child: Center(
                           child: TextButton(
                             onPressed: () {
-                              box.delete(todoKey);
+                              widget.box.delete(widget.todoKey);
+                              widget.notifyParent();
                             },
                             child: Text(
                               "clear",
@@ -85,8 +96,9 @@ class FinishedTodoListScreenToDoField extends StatelessWidget {
                         child: Center(
                           child: TextButton(
                             onPressed: () {
-                              todo.done = !todo.done;
-                              box.put(todoKey, todo);
+                              widget.todo.done = !widget.todo.done;
+                              widget.box.put(widget.todoKey, widget.todo);
+                              widget.notifyParent();
                             },
                             child: Text(
                               "undo",
