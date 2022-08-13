@@ -19,10 +19,13 @@ class EditTodoScreenBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController taskNameController = TextEditingController();
-    TextEditingController pomodoroNumberController = TextEditingController();
+    Todo oldVersion = box.get(todokey);
+    TextEditingController taskNameController =
+        TextEditingController(text: oldVersion.taskName);
+    TextEditingController pomodoroNumberController =
+        TextEditingController(text: oldVersion.estimatedPomodoros.toString());
     TextEditingController donePomodoroNumberController =
-        TextEditingController();
+        TextEditingController(text: oldVersion.finishedPomodoros.toString());
     return Center(
       child: Column(children: [
         TextFormField(
