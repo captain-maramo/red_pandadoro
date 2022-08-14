@@ -7,11 +7,12 @@ import 'main_progress_circle_button.dart';
 import 'main_todo_field.dart';
 
 class MainScreenBody extends StatefulWidget {
-  const MainScreenBody({Key? key, required this.themeData, required this.box})
+  const MainScreenBody(
+      {Key? key, required this.themeData, required this.todoBox})
       : super(key: key);
 
   final ThemeData themeData;
-  final Box box;
+  final Box todoBox;
 
   @override
   State<MainScreenBody> createState() => _MainScreenBodyState();
@@ -25,7 +26,7 @@ class _MainScreenBodyState extends State<MainScreenBody> {
         children: <Widget>[
           MainScreenToDoField(
             themeData: widget.themeData,
-            box: widget.box,
+            todoBox: widget.todoBox,
           ),
           const Padding(
             padding: EdgeInsets.all(16.0),

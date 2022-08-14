@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import 'package:red_pandadoro/application/theme/theme_service.dart';
+import 'package:red_pandadoro/infrastructure/models/pomodoro_state.dart';
 import 'package:red_pandadoro/infrastructure/models/todo.dart';
 import 'package:red_pandadoro/theme.dart';
 
@@ -10,7 +11,8 @@ import 'injection.dart' as di; // di == dependency injection
 
 import 'presentation/pomodoro/main_screen.dart';
 
-late Box box;
+late Box todoBox;
+late Box pomodoroStateBox;
 
 void testDataToBox() {}
 
@@ -20,20 +22,22 @@ Future<void> main() async {
   await di.sl<ThemeService>().initMode();
   await Hive.initFlutter();
   Hive.registerAdapter<Todo>(TodoAdapter());
-  box = await Hive.openBox<Todo>('todoBox');
+  Hive.registerAdapter<PomodoroState>(PomodoroStateAdapter());
+  todoBox = await Hive.openBox<Todo>('todoBox');
+  pomodoroStateBox = await Hive.openBox<Todo>('pomodoroStateBox');
 
   runApp(
     ChangeNotifierProvider(
       create: (context) => di.sl<ThemeService>(),
-      child: MyApp(box: box),
+      child: MyApp(todoBox: todoBox),
     ),
   );
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key, required this.box}) : super(key: key);
+  const MyApp({Key? key, required this.todoBox}) : super(key: key);
 
-  final Box box;
+  final Box todoBox;
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +55,7 @@ class MyApp extends StatelessWidget {
                   : ThemeMode.light,
           home: MainScreen(
             title: "Red Pandadoro",
-            box: box,
+            todoBox: todoBox,
           ),
         );
       },

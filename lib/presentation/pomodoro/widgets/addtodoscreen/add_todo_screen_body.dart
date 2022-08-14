@@ -5,11 +5,11 @@ import 'package:red_pandadoro/infrastructure/models/todo.dart';
 
 class AddTodoScreenBody extends StatelessWidget {
   const AddTodoScreenBody(
-      {Key? key, required this.themeData, required this.box})
+      {Key? key, required this.themeData, required this.todoBox})
       : super(key: key);
 
   final ThemeData themeData;
-  final Box box;
+  final Box todoBox;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +30,7 @@ class AddTodoScreenBody extends StatelessWidget {
         ),
         TextButton(
           onPressed: () {
-            box.add(Todo(
+            todoBox.add(Todo(
                 taskName: taskNameController.text,
                 estimatedPomodoros: int.parse(pomodoroNumberController.text),
                 finishedPomodoros: 0,

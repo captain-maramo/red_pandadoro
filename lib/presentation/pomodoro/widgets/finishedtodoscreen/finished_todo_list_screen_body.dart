@@ -6,11 +6,11 @@ import '../../../../infrastructure/models/todo.dart';
 
 class FinishedTodoScreenBody extends StatefulWidget {
   const FinishedTodoScreenBody(
-      {Key? key, required this.themeData, required this.box})
+      {Key? key, required this.themeData, required this.todoBox})
       : super(key: key);
 
   final ThemeData themeData;
-  final Box box;
+  final Box todoBox;
 
   @override
   State<FinishedTodoScreenBody> createState() => _FinishedTodoScreenBodyState();
@@ -25,16 +25,16 @@ class _FinishedTodoScreenBodyState extends State<FinishedTodoScreenBody> {
   Widget build(BuildContext context) {
     return Center(
       child: ListView.builder(
-          itemCount: widget.box.length,
+          itemCount: widget.todoBox.length,
           itemBuilder: (BuildContext context, int index) {
-            Todo now = widget.box.getAt(index);
+            Todo now = widget.todoBox.getAt(index);
             return !now.done
                 ? Container()
                 : FinishedTodoListScreenToDoField(
                     themeData: widget.themeData,
-                    box: widget.box,
-                    todo: widget.box.getAt(index),
-                    todoKey: widget.box.keyAt(index),
+                    todoBox: widget.todoBox,
+                    todo: widget.todoBox.getAt(index),
+                    todoKey: widget.todoBox.keyAt(index),
                     notifyParent: refresh,
                   );
           }),

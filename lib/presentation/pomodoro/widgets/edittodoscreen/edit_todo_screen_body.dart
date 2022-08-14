@@ -7,19 +7,19 @@ class EditTodoScreenBody extends StatelessWidget {
   const EditTodoScreenBody({
     Key? key,
     required this.themeData,
-    required this.box,
+    required this.todoBox,
     required this.todokey,
     required this.notifyParent,
   }) : super(key: key);
 
   final ThemeData themeData;
-  final Box box;
+  final Box todoBox;
   final dynamic todokey;
   final Function() notifyParent;
 
   @override
   Widget build(BuildContext context) {
-    Todo oldVersion = box.get(todokey);
+    Todo oldVersion = todoBox.get(todokey);
     TextEditingController taskNameController =
         TextEditingController(text: oldVersion.taskName);
     TextEditingController pomodoroNumberController =
@@ -50,7 +50,7 @@ class EditTodoScreenBody extends StatelessWidget {
         ),
         TextButton(
           onPressed: () {
-            box.put(
+            todoBox.put(
                 todokey,
                 Todo(
                     taskName: taskNameController.text,

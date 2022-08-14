@@ -7,11 +7,12 @@ import 'widgets/menu_drawer.dart';
 import 'widgets/todo_bottom_nav_bar.dart';
 
 class FinishedTodoScreen extends StatefulWidget {
-  const FinishedTodoScreen({Key? key, required this.title, required this.box})
+  const FinishedTodoScreen(
+      {Key? key, required this.title, required this.todoBox})
       : super(key: key);
 
   final String title;
-  final Box box;
+  final Box todoBox;
 
   @override
   State<FinishedTodoScreen> createState() => _FinishedTodoScreenState();
@@ -27,11 +28,11 @@ class _FinishedTodoScreenState extends State<FinishedTodoScreen> {
       ),
       endDrawer: Drawer(
         child: MenuDrawer(
-          box: widget.box,
+          todoBox: widget.todoBox,
         ),
       ),
       body: FinishedTodoScreenBody(
-        box: box,
+        todoBox: todoBox,
         themeData: themeData,
       ),
       bottomNavigationBar: const TodoBottomNavBar(),

@@ -7,14 +7,14 @@ class FinishedTodoListScreenToDoField extends StatefulWidget {
   const FinishedTodoListScreenToDoField(
       {Key? key,
       required this.themeData,
-      required this.box,
+      required this.todoBox,
       required this.todo,
       required this.todoKey,
       required this.notifyParent})
       : super(key: key);
 
   final ThemeData themeData;
-  final Box box;
+  final Box todoBox;
   final Todo todo;
   final dynamic todoKey;
   final Function() notifyParent;
@@ -47,7 +47,7 @@ class _FinishedTodoListScreenToDoFieldState
                   child: Center(
                     child: TextButton(
                       onPressed: () {
-                        widget.box.add(Todo(
+                        widget.todoBox.add(Todo(
                           done: false,
                           estimatedPomodoros: 1,
                           finishedPomodoros: 0,
@@ -76,7 +76,7 @@ class _FinishedTodoListScreenToDoFieldState
                         child: Center(
                           child: TextButton(
                             onPressed: () {
-                              widget.box.delete(widget.todoKey);
+                              widget.todoBox.delete(widget.todoKey);
                               widget.notifyParent();
                             },
                             child: Text(
@@ -97,7 +97,7 @@ class _FinishedTodoListScreenToDoFieldState
                           child: TextButton(
                             onPressed: () {
                               widget.todo.done = !widget.todo.done;
-                              widget.box.put(widget.todoKey, widget.todo);
+                              widget.todoBox.put(widget.todoKey, widget.todo);
                               widget.notifyParent();
                             },
                             child: Text(

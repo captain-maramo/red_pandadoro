@@ -6,11 +6,11 @@ import 'widgets/menu_drawer.dart';
 import 'widgets/todo_bottom_nav_bar.dart';
 
 class TodoListScreen extends StatefulWidget {
-  const TodoListScreen({Key? key, required this.title, required this.box})
+  const TodoListScreen({Key? key, required this.title, required this.todoBox})
       : super(key: key);
 
   final String title;
-  final Box box;
+  final Box todoBox;
 
   @override
   State<TodoListScreen> createState() => _TodoListScreenState();
@@ -25,11 +25,11 @@ class _TodoListScreenState extends State<TodoListScreen> {
         title: const Text("Red Pandadoro"),
       ),
       endDrawer: Drawer(
-        child: MenuDrawer(box: widget.box),
+        child: MenuDrawer(todoBox: widget.todoBox),
       ),
       body: TodoScreenBody(
         themeData: themeData,
-        box: widget.box,
+        todoBox: widget.todoBox,
       ),
       bottomNavigationBar: const TodoBottomNavBar(),
     );

@@ -4,11 +4,11 @@ import 'package:red_pandadoro/presentation/pomodoro/todo_list_screen.dart';
 
 class MainScreenToDoField extends StatelessWidget {
   const MainScreenToDoField(
-      {Key? key, required this.themeData, required this.box})
+      {Key? key, required this.themeData, required this.todoBox})
       : super(key: key);
 
   final ThemeData themeData;
-  final Box box;
+  final Box todoBox;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,7 @@ class MainScreenToDoField extends StatelessWidget {
                     MaterialPageRoute(
                         builder: (context) => TodoListScreen(
                               title: 'Red Pandadoro',
-                              box: box,
+                              todoBox: todoBox,
                             )),
                   );
                 },
