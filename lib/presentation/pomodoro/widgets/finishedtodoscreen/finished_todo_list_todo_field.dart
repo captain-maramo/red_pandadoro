@@ -45,24 +45,13 @@ class _FinishedTodoListScreenToDoFieldState
                   height: 120,
                   width: 200,
                   child: Center(
-                    child: TextButton(
-                      onPressed: () {
-                        widget.todoBox.add(Todo(
-                          done: false,
-                          estimatedPomodoros: 1,
-                          finishedPomodoros: 0,
-                          taskName: 'Buttonpressed',
-                        ));
-                        widget.notifyParent();
-                      },
-                      child: Text(
-                        widget.todo.taskName,
-                        textAlign: TextAlign.center,
-                        style: Theme.of(context)
-                            .textTheme
-                            .button
-                            ?.copyWith(fontSize: 36),
-                      ),
+                    child: Text(
+                      widget.todo.taskName,
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context)
+                          .textTheme
+                          .button
+                          ?.copyWith(fontSize: 36),
                     ),
                   ),
                 ),
