@@ -2,13 +2,35 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:red_pandadoro/presentation/pomodoro/todo_list_screen.dart';
 
-class MainScreenToDoField extends StatelessWidget {
+class MainScreenToDoField extends StatefulWidget {
   const MainScreenToDoField(
-      {Key? key, required this.themeData, required this.todoBox})
+      {Key? key,
+      required this.themeData,
+      required this.todoBox,
+      required this.state})
       : super(key: key);
 
   final ThemeData themeData;
   final Box todoBox;
+  final String state;
+
+  @override
+  State<MainScreenToDoField> createState() => _MainScreenToDoFieldState();
+}
+
+class _MainScreenToDoFieldState extends State<MainScreenToDoField> {
+  String stateBasedTextSwitch() {
+    switch (widget.state) {
+      case "pomodoro":
+        return "Click to choose task";
+      case "short_break":
+        return "Take a short break";
+      case "long_break":
+        return "Take a long break";
+      default:
+        return "Click to choose task";
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +40,7 @@ class MainScreenToDoField extends StatelessWidget {
         elevation: 16,
         child: Container(
           decoration: BoxDecoration(
-              color: themeData.colorScheme.secondary,
+              color: widget.themeData.colorScheme.secondary,
               borderRadius: BorderRadius.circular(8)),
           child: SizedBox(
             height: 120,
@@ -31,12 +53,12 @@ class MainScreenToDoField extends StatelessWidget {
                     MaterialPageRoute(
                         builder: (context) => TodoListScreen(
                               title: 'Red Pandadoro',
-                              todoBox: todoBox,
+                              todoBox: widget.todoBox,
                             )),
                   );
                 },
                 child: Text(
-                  'Click to choose task',
+                  stateBasedTextSwitch(),
                   textAlign: TextAlign.center,
                   style: Theme.of(context)
                       .textTheme

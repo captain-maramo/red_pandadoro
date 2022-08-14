@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import 'package:red_pandadoro/application/theme/theme_service.dart';
+import 'package:red_pandadoro/infrastructure/models/last_button_pressed.dart';
 import 'package:red_pandadoro/infrastructure/models/pomodoro_state.dart';
 import 'package:red_pandadoro/infrastructure/models/todo.dart';
 import 'package:red_pandadoro/theme.dart';
@@ -13,6 +14,7 @@ import 'presentation/pomodoro/main_screen.dart';
 
 late Box todoBox;
 late Box pomodoroStateBox;
+late Box lastButtonPressedBox;
 
 void testDataToBox() {}
 
@@ -23,21 +25,40 @@ Future<void> main() async {
   await Hive.initFlutter();
   Hive.registerAdapter<Todo>(TodoAdapter());
   Hive.registerAdapter<PomodoroState>(PomodoroStateAdapter());
+  Hive.registerAdapter<LastButtonPressed>(LastButtonPressedAdapter());
+  lastButtonPressedBox =
+      await Hive.openBox<LastButtonPressed>('lastButtonPressedBox');
   todoBox = await Hive.openBox<Todo>('todoBox');
-  pomodoroStateBox = await Hive.openBox<Todo>('pomodoroStateBox');
+  pomodoroStateBox = await Hive.openBox<PomodoroState>('pomodoroStateBox');
+  pomodoroStateBox.put(
+      'pomodoroState',
+      PomodoroState(
+          todo: Todo(
+              taskName: "",
+              estimatedPomodoros: 4,
+              finishedPomodoros: 2,
+              done: false),
+          state: "long_break",
+          secondsLeft: 10,
+          running: false,
+          pomodoroCount: 2));
+  lastButtonPressedBox.put(
+      "lastButtonPressed", LastButtonPressed(buttonName: "buttonName"));
 
   runApp(
     ChangeNotifierProvider(
       create: (context) => di.sl<ThemeService>(),
-      child: MyApp(todoBox: todoBox),
+      child: MyApp(todoBox: todoBox, pomodoroStateBox: pomodoroStateBox),
     ),
   );
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key, required this.todoBox}) : super(key: key);
+  const MyApp({Key? key, required this.todoBox, required this.pomodoroStateBox})
+      : super(key: key);
 
   final Box todoBox;
+  final Box pomodoroStateBox;
 
   @override
   Widget build(BuildContext context) {
@@ -56,6 +77,8 @@ class MyApp extends StatelessWidget {
           home: MainScreen(
             title: "Red Pandadoro",
             todoBox: todoBox,
+            pomodoroStateBox: pomodoroStateBox,
+            lastButtonPressedBox: lastButtonPressedBox,
           ),
         );
       },
