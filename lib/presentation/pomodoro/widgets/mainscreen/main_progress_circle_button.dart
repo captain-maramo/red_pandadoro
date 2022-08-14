@@ -21,19 +21,17 @@ class _ProgressCircleButtonState extends State<ProgressCircleButton> {
     return "$mins:$seconds";
   }
 
-  bool _isRunning = true;
+  bool _isRunning = false;
   @override
   Widget build(BuildContext context) {
-    String timer = secondsToMinAndSeconds();
+    String timerString = secondsToMinAndSeconds();
 
     return ElevatedButton(
       onPressed: () {
+        _isRunning = !_isRunning;
         Timer.periodic(const Duration(seconds: 1), (Timer timer) {
-          if (!_isRunning) {
-            timer.cancel();
-          }
           setState(() {
-            if (secondsLeft > 0) {
+            if (secondsLeft > 0 && _isRunning) {
               secondsLeft--;
             } else {
               timer.cancel();
@@ -41,7 +39,6 @@ class _ProgressCircleButtonState extends State<ProgressCircleButton> {
             }
           });
         });
-        super.initState();
       },
       style: ElevatedButton.styleFrom(
         fixedSize: const Size(300, 300),
@@ -52,7 +49,7 @@ class _ProgressCircleButtonState extends State<ProgressCircleButton> {
         lineWidth: 10.0,
         percent: 1 - secondsLeft / 1500,
         center: Text(
-          timer,
+          timerString,
           style: const TextStyle(fontSize: 64),
         ),
         progressColor: const Color.fromRGBO(46, 125, 50, 1),
