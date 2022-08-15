@@ -184,6 +184,7 @@ class _MainScreenBodyState extends State<MainScreenBody> {
             themeData: widget.themeData,
             todoBox: widget.todoBox,
             state: pomodoroState.state,
+            pomodoroStateBox: widget.pomodoroStateBox,
           ),
           Padding(
             padding: const EdgeInsets.all(16.0),

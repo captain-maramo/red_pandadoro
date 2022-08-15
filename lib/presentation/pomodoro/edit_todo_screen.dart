@@ -11,11 +11,13 @@ class EditTodoScreen extends StatefulWidget {
     required this.title,
     required this.todoBox,
     required this.todokey,
+    required this.pomodoroStateBox,
     required this.notifyParent,
   }) : super(key: key);
 
   final String title;
   final Box todoBox;
+  final Box pomodoroStateBox;
   final dynamic todokey;
   final Function() notifyParent;
 
@@ -33,8 +35,7 @@ class _EditTodoScreenState extends State<EditTodoScreen> {
       ),
       endDrawer: Drawer(
         child: MenuDrawer(
-          todoBox: widget.todoBox,
-        ),
+            todoBox: widget.todoBox, pomodoroStateBox: widget.pomodoroStateBox),
       ),
       body: EditTodoScreenBody(
           todoBox: widget.todoBox,

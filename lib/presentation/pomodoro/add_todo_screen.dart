@@ -6,11 +6,16 @@ import 'widgets/menu_drawer.dart';
 import 'widgets/todo_bottom_nav_bar.dart';
 
 class AddTodoScreen extends StatefulWidget {
-  const AddTodoScreen({Key? key, required this.title, required this.todoBox})
+  const AddTodoScreen(
+      {Key? key,
+      required this.title,
+      required this.todoBox,
+      required this.pomodoroStateBox})
       : super(key: key);
 
   final String title;
   final Box todoBox;
+  final Box pomodoroStateBox;
 
   @override
   State<AddTodoScreen> createState() => _AddTodoScreenState();
@@ -27,6 +32,7 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
       endDrawer: Drawer(
         child: MenuDrawer(
           todoBox: widget.todoBox,
+          pomodoroStateBox: widget.pomodoroStateBox,
         ),
       ),
       body: AddTodoScreenBody(

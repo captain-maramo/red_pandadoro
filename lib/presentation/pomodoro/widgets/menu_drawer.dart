@@ -8,9 +8,12 @@ import '../../../application/theme/theme_service.dart';
 import '../todo_list_screen.dart';
 
 class MenuDrawer extends StatefulWidget {
-  const MenuDrawer({Key? key, required this.todoBox}) : super(key: key);
+  const MenuDrawer(
+      {Key? key, required this.todoBox, required this.pomodoroStateBox})
+      : super(key: key);
 
   final Box todoBox;
+  final Box pomodoroStateBox;
 
   @override
   State<MenuDrawer> createState() => _MenuDrawerState();
@@ -68,6 +71,7 @@ class _MenuDrawerState extends State<MenuDrawer> {
                   builder: (context) => AddTodoScreen(
                         title: 'Red Pandadoro',
                         todoBox: widget.todoBox,
+                        pomodoroStateBox: widget.pomodoroStateBox,
                       )),
             );
           },
@@ -82,7 +86,10 @@ class _MenuDrawerState extends State<MenuDrawer> {
               context,
               MaterialPageRoute(
                   builder: (context) => TodoListScreen(
-                      title: 'Red Pandadoro', todoBox: widget.todoBox)),
+                        title: 'Red Pandadoro',
+                        todoBox: widget.todoBox,
+                        pomodoroStateBox: widget.pomodoroStateBox,
+                      )),
             );
           },
         ),
@@ -97,6 +104,7 @@ class _MenuDrawerState extends State<MenuDrawer> {
                   builder: (context) => FinishedTodoScreen(
                         title: 'Red Pandadoro',
                         todoBox: widget.todoBox,
+                        pomodoroStateBox: widget.pomodoroStateBox,
                       )),
             );
           },

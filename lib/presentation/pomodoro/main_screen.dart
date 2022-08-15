@@ -31,7 +31,8 @@ class _MainScreenState extends State<MainScreen> {
         title: Text(widget.title),
       ),
       endDrawer: Drawer(
-        child: MenuDrawer(todoBox: widget.todoBox),
+        child: MenuDrawer(
+            todoBox: widget.todoBox, pomodoroStateBox: widget.pomodoroStateBox),
       ),
       body: MainScreenBody(
           themeData: themeData,

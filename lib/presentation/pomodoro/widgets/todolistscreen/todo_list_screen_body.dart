@@ -6,11 +6,15 @@ import '../../../../infrastructure/models/todo.dart';
 
 class TodoScreenBody extends StatefulWidget {
   const TodoScreenBody(
-      {Key? key, required this.themeData, required this.todoBox})
+      {Key? key,
+      required this.themeData,
+      required this.todoBox,
+      required this.pomodoroStateBox})
       : super(key: key);
 
   final ThemeData themeData;
   final Box todoBox;
+  final Box pomodoroStateBox;
 
   @override
   State<TodoScreenBody> createState() => _TodoScreenBodyState();
@@ -36,6 +40,7 @@ class _TodoScreenBodyState extends State<TodoScreenBody> {
                     todo: widget.todoBox.getAt(index),
                     todoKey: widget.todoBox.keyAt(index),
                     notifyParent: refresh,
+                    pomodoroStateBox: widget.pomodoroStateBox,
                   );
           }),
     );

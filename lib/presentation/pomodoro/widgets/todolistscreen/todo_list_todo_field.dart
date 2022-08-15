@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:red_pandadoro/infrastructure/models/pomodoro_state.dart';
 import 'package:red_pandadoro/presentation/pomodoro/edit_todo_screen.dart';
 
 import '../../../../infrastructure/models/todo.dart';
@@ -11,7 +12,8 @@ class TodoListScreenToDoField extends StatefulWidget {
       required this.todoBox,
       required this.todo,
       required this.todoKey,
-      required this.notifyParent})
+      required this.notifyParent,
+      required this.pomodoroStateBox})
       : super(key: key);
 
   final ThemeData themeData;
@@ -19,6 +21,7 @@ class TodoListScreenToDoField extends StatefulWidget {
   final Todo todo;
   final dynamic todoKey;
   final Function() notifyParent;
+  final Box pomodoroStateBox;
 
   @override
   State<TodoListScreenToDoField> createState() =>
@@ -47,13 +50,14 @@ class _TodoListScreenToDoFieldState extends State<TodoListScreenToDoField> {
                   child: Center(
                     child: TextButton(
                       onPressed: () {
-                        widget.todoBox.add(Todo(
-                          done: false,
-                          estimatedPomodoros: 1,
-                          finishedPomodoros: 0,
-                          taskName: 'Buttonpressed',
-                        ));
+                        PomodoroState actualstate =
+                            widget.pomodoroStateBox.get("pomodoroState");
+                        actualstate.todo = widget.todo;
+                        widget.pomodoroStateBox
+                            .put("pomodoroState", actualstate);
                         widget.notifyParent();
+                        Navigator.of(context)
+                            .popUntil((route) => route.isFirst);
                       },
                       child: Text(
                         widget.todo.taskName,
@@ -127,6 +131,8 @@ class _TodoListScreenToDoFieldState extends State<TodoListScreenToDoField> {
                                                     todokey: widget.todoKey,
                                                     notifyParent:
                                                         widget.notifyParent,
+                                                    pomodoroStateBox:
+                                                        widget.pomodoroStateBox,
                                                   )),
                                         );
                                       },
