@@ -35,14 +35,14 @@ Future<void> main() async {
       PomodoroState(
         todo: Todo(
             taskName: "",
-            estimatedPomodoros: 4,
-            finishedPomodoros: 2,
+            estimatedPomodoros: 0,
+            finishedPomodoros: 0,
             done: false,
             todoKey: "initial"),
         state: "pomodoro",
-        secondsLeft: 10,
+        secondsLeft: 1500,
         running: false,
-        pomodoroCount: 2,
+        pomodoroCount: 0,
       ));
   lastButtonPressedBox.put(
       "lastButtonPressed", LastButtonPressed(buttonName: "buttonName"));

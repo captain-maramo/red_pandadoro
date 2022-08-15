@@ -28,7 +28,17 @@ class _TodoListScreenState extends State<TodoListScreen> {
     PomodoroState pomodoroState = widget.pomodoroStateBox.get("pomodoroState");
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Red Pandadoro"),
+        title: Padding(
+          padding: const EdgeInsets.only(left: 50.0),
+          child: Center(
+            child: Image.asset(
+              'assets/logo.png',
+              fit: BoxFit.fitHeight,
+              height: 45,
+              color: themeData.iconTheme.color,
+            ),
+          ),
+        ),
       ),
       endDrawer: Drawer(
         child: MenuDrawer(

@@ -30,7 +30,17 @@ class _EditTodoScreenState extends State<EditTodoScreen> {
     final themeData = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Padding(
+          padding: const EdgeInsets.only(left: 50.0),
+          child: Center(
+            child: Image.asset(
+              'assets/logo.png',
+              fit: BoxFit.fitHeight,
+              height: 45,
+              color: themeData.iconTheme.color,
+            ),
+          ),
+        ),
       ),
       endDrawer: Drawer(
         child: MenuDrawer(

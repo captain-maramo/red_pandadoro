@@ -56,7 +56,13 @@ dev_dependencies:
   flutter_lints: ^2.0.0
   hive_generator: ^1.1.1
   build_runner: ^2.1.5
+  flutter_launcher_icons: ^0.10.0
 
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/icon.png"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -94,6 +100,8 @@ flutter:
         - asset: fonts/RobotoCondensed-Italic.ttf
         - asset: fonts/RobotoCondensed-Light.ttf
         - asset: fonts/RobotoCondensed-LightItalic.ttf
+  assets:
+    - assets/
   #   - family: Schyler
   #     fonts:
   #       - asset: fonts/Schyler-Regular.ttf
