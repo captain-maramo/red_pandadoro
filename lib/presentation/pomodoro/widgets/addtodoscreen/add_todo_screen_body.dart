@@ -42,7 +42,7 @@ class AddTodoScreenBody extends StatelessWidget {
             Navigator.of(context).pop();
           },
           child: Text(
-            'TestButton',
+            'Add',
             textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.button?.copyWith(fontSize: 36),
           ),

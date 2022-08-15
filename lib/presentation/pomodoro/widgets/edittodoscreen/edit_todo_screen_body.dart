@@ -64,7 +64,7 @@ class EditTodoScreenBody extends StatelessWidget {
             Navigator.of(context).pop();
           },
           child: Text(
-            'TestButton',
+            'Update',
             textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.button?.copyWith(fontSize: 36),
           ),
