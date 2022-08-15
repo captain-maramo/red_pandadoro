@@ -107,6 +107,8 @@ class _TodoListScreenToDoFieldState extends State<TodoListScreenToDoField> {
                           icon: const Icon(Icons.check_outlined),
                           iconSize: 55,
                           onPressed: () {
+                            PomodoroState todo =
+                                widget.pomodoroStateBox.get("pomodoroState");
                             widget.todo.done = !widget.todo.done;
                             widget.todoBox.put(widget.todoKey, widget.todo);
                             widget.pomodoroStateBox.put(
@@ -118,10 +120,10 @@ class _TodoListScreenToDoFieldState extends State<TodoListScreenToDoField> {
                                       finishedPomodoros: 2,
                                       done: false,
                                       todoKey: -1),
-                                  state: "pomodoro",
-                                  secondsLeft: 10,
+                                  state: todo.state,
+                                  secondsLeft: todo.secondsLeft,
                                   running: false,
-                                  pomodoroCount: 2,
+                                  pomodoroCount: todo.pomodoroCount,
                                 ));
                             widget.notifyParent();
                           },

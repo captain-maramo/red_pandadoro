@@ -193,10 +193,10 @@ class _MainScreenToDoFieldState extends State<MainScreenToDoField> {
                                         finishedPomodoros: 2,
                                         done: false,
                                         todoKey: -1),
-                                    state: "pomodoro",
-                                    secondsLeft: 10,
+                                    state: todo.state,
+                                    secondsLeft: todo.secondsLeft,
                                     running: false,
-                                    pomodoroCount: 2,
+                                    pomodoroCount: todo.pomodoroCount,
                                   ));
                             },
                           ),
