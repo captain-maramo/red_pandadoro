@@ -3,7 +3,6 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:red_pandadoro/presentation/pomodoro/widgets/edittodoscreen/edit_todo_screen_body.dart';
 
 import 'widgets/menu_drawer.dart';
-import 'widgets/todo_bottom_nav_bar.dart';
 
 class EditTodoScreen extends StatefulWidget {
   const EditTodoScreen({
@@ -42,7 +41,6 @@ class _EditTodoScreenState extends State<EditTodoScreen> {
           themeData: themeData,
           todokey: widget.todokey,
           notifyParent: widget.notifyParent),
-      bottomNavigationBar: const TodoBottomNavBar(),
     );
   }
 }

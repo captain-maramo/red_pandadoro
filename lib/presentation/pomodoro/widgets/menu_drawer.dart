@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
+import 'package:red_pandadoro/presentation/pomodoro/add_and_list_screen.dart';
 import 'package:red_pandadoro/presentation/pomodoro/add_todo_screen.dart';
 import 'package:red_pandadoro/presentation/pomodoro/finished_todo_screen.dart';
 
@@ -68,10 +69,11 @@ class _MenuDrawerState extends State<MenuDrawer> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => AddTodoScreen(
+                  builder: (context) => AddAndListScreen(
                         title: 'Red Pandadoro',
                         todoBox: widget.todoBox,
                         pomodoroStateBox: widget.pomodoroStateBox,
+                        index: 0,
                       )),
             );
           },
@@ -85,10 +87,11 @@ class _MenuDrawerState extends State<MenuDrawer> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => TodoListScreen(
+                  builder: (context) => AddAndListScreen(
                         title: 'Red Pandadoro',
                         todoBox: widget.todoBox,
                         pomodoroStateBox: widget.pomodoroStateBox,
+                        index: 1,
                       )),
             );
           },
@@ -101,10 +104,11 @@ class _MenuDrawerState extends State<MenuDrawer> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => FinishedTodoScreen(
+                  builder: (context) => AddAndListScreen(
                         title: 'Red Pandadoro',
                         todoBox: widget.todoBox,
                         pomodoroStateBox: widget.pomodoroStateBox,
+                        index: 2,
                       )),
             );
           },

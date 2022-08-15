@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:red_pandadoro/infrastructure/models/pomodoro_state.dart';
+import 'package:red_pandadoro/main.dart';
 import 'package:red_pandadoro/presentation/pomodoro/todo_list_screen.dart';
 
 import '../../../../infrastructure/models/todo.dart';
+import '../../add_and_list_screen.dart';
 
 class MainScreenToDoField extends StatefulWidget {
   const MainScreenToDoField(
@@ -43,6 +45,7 @@ class _MainScreenToDoFieldState extends State<MainScreenToDoField> {
   }
 
   Widget stateBasedToDoField() {
+    PomodoroState pomodoroState = widget.pomodoroStateBox.get("pomodoroState");
     if ((widget.state == "pomodoro" &&
             stateBasedTextSwitch() == "Click to choose task") ||
         widget.state != "pomodoro") {
@@ -63,10 +66,11 @@ class _MainScreenToDoFieldState extends State<MainScreenToDoField> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => TodoListScreen(
+                          builder: (context) => AddAndListScreen(
                                 title: 'Red Pandadoro',
                                 todoBox: widget.todoBox,
                                 pomodoroStateBox: widget.pomodoroStateBox,
+                                index: 1,
                               )),
                     );
                   },
@@ -78,6 +82,32 @@ class _MainScreenToDoFieldState extends State<MainScreenToDoField> {
                         .button
                         ?.copyWith(fontSize: 36),
                   ),
+                ),
+              ),
+            ),
+          ),
+        ),
+      );
+    } else if (pomodoroState.running) {
+      return Padding(
+        padding: const EdgeInsetsDirectional.all(16.0),
+        child: Material(
+          elevation: 16,
+          child: Container(
+            decoration: BoxDecoration(
+                color: widget.themeData.colorScheme.secondary,
+                borderRadius: BorderRadius.circular(8)),
+            child: SizedBox(
+              height: 120,
+              width: 300,
+              child: Center(
+                child: Text(
+                  stateBasedTextSwitch(),
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context)
+                      .textTheme
+                      .button
+                      ?.copyWith(fontSize: 36),
                 ),
               ),
             ),
@@ -110,11 +140,12 @@ class _MainScreenToDoFieldState extends State<MainScreenToDoField> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => TodoListScreen(
+                                  builder: (context) => AddAndListScreen(
                                         title: 'Red Pandadoro',
                                         todoBox: widget.todoBox,
                                         pomodoroStateBox:
                                             widget.pomodoroStateBox,
+                                        index: 1,
                                       )),
                             );
                           },

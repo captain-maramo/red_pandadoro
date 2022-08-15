@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:red_pandadoro/presentation/pomodoro/widgets/addtodoscreen/add_todo_screen_body.dart';
 
+import '../../infrastructure/models/pomodoro_state.dart';
 import 'widgets/menu_drawer.dart';
-import 'widgets/todo_bottom_nav_bar.dart';
 
 class AddTodoScreen extends StatefulWidget {
   const AddTodoScreen(
@@ -25,6 +25,8 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
+    PomodoroState pomodoroState = widget.pomodoroStateBox.get("pomodoroState");
+
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -39,7 +41,6 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
         todoBox: widget.todoBox,
         themeData: themeData,
       ),
-      bottomNavigationBar: const TodoBottomNavBar(),
     );
   }
 }

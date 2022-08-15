@@ -38,7 +38,7 @@ Future<void> main() async {
             estimatedPomodoros: 4,
             finishedPomodoros: 2,
             done: false,
-            todoKey: -1),
+            todoKey: "initial"),
         state: "pomodoro",
         secondsLeft: 10,
         running: false,
