@@ -58,7 +58,8 @@ class EditTodoScreenBody extends StatelessWidget {
                         int.parse(pomodoroNumberController.text),
                     finishedPomodoros:
                         int.parse(donePomodoroNumberController.text),
-                    done: false));
+                    done: false,
+                    todoKey: todokey));
             notifyParent();
             Navigator.of(context).pop();
           },

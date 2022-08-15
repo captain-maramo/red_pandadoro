@@ -8,7 +8,8 @@ class Todo {
       {required this.taskName,
       required this.estimatedPomodoros,
       required this.finishedPomodoros,
-      required this.done});
+      required this.done,
+      required this.todoKey});
   @HiveField(0)
   String taskName;
 
@@ -20,4 +21,7 @@ class Todo {
 
   @HiveField(3)
   bool done;
+
+  @HiveField(4)
+  dynamic todoKey;
 }

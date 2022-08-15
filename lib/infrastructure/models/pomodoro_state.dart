@@ -11,7 +11,8 @@ class PomodoroState {
       required this.state,
       required this.secondsLeft,
       required this.running,
-      required this.pomodoroCount});
+      required this.pomodoroCount,
+      });
   @HiveField(0)
   Todo todo;
 

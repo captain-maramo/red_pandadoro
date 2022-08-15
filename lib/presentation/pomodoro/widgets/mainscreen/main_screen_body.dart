@@ -3,6 +3,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:red_pandadoro/infrastructure/models/last_button_pressed.dart';
 import 'package:red_pandadoro/infrastructure/models/pomodoro_state.dart';
 import 'package:red_pandadoro/infrastructure/models/todo.dart';
+import 'package:red_pandadoro/main.dart';
 import 'dart:async';
 
 import 'main_button_row.dart';
@@ -36,28 +37,32 @@ class _MainScreenBodyState extends State<MainScreenBody> {
 
   PomodoroState pausePomodoro(PomodoroState pomodoroState) {
     return PomodoroState(
-        todo: Todo(
-            taskName: pomodoroState.todo.taskName,
-            estimatedPomodoros: pomodoroState.todo.estimatedPomodoros,
-            finishedPomodoros: pomodoroState.todo.finishedPomodoros,
-            done: pomodoroState.todo.done),
-        state: pomodoroState.state,
-        secondsLeft: pomodoroState.secondsLeft,
-        running: pomodoroState.running,
-        pomodoroCount: pomodoroState.pomodoroCount);
+      todo: Todo(
+          taskName: pomodoroState.todo.taskName,
+          estimatedPomodoros: pomodoroState.todo.estimatedPomodoros,
+          finishedPomodoros: pomodoroState.todo.finishedPomodoros,
+          done: pomodoroState.todo.done,
+          todoKey: pomodoroState.todo.todoKey),
+      state: pomodoroState.state,
+      secondsLeft: pomodoroState.secondsLeft,
+      running: pomodoroState.running,
+      pomodoroCount: pomodoroState.pomodoroCount,
+    );
   }
 
   PomodoroState setNextPomodoroState(PomodoroState pomodoroState) {
     PomodoroState nextState = PomodoroState(
-        todo: Todo(
-            taskName: pomodoroState.todo.taskName,
-            estimatedPomodoros: pomodoroState.todo.estimatedPomodoros,
-            finishedPomodoros: pomodoroState.todo.finishedPomodoros,
-            done: pomodoroState.todo.done),
-        state: pomodoroState.state,
-        secondsLeft: pomodoroState.secondsLeft,
-        running: pomodoroState.running,
-        pomodoroCount: pomodoroState.pomodoroCount);
+      todo: Todo(
+          taskName: pomodoroState.todo.taskName,
+          estimatedPomodoros: pomodoroState.todo.estimatedPomodoros,
+          finishedPomodoros: pomodoroState.todo.finishedPomodoros,
+          done: pomodoroState.todo.done,
+          todoKey: pomodoroState.todo.todoKey),
+      state: pomodoroState.state,
+      secondsLeft: pomodoroState.secondsLeft,
+      running: pomodoroState.running,
+      pomodoroCount: pomodoroState.pomodoroCount,
+    );
     if (pomodoroState.state == "pomodoro") {
       if (pomodoroState.pomodoroCount == 3) {
         nextState.pomodoroCount = 4;
@@ -82,15 +87,17 @@ class _MainScreenBodyState extends State<MainScreenBody> {
 
   PomodoroState rewindPomodoroState(PomodoroState pomodoroState) {
     PomodoroState nextState = PomodoroState(
-        todo: Todo(
-            taskName: pomodoroState.todo.taskName,
-            estimatedPomodoros: pomodoroState.todo.estimatedPomodoros,
-            finishedPomodoros: pomodoroState.todo.finishedPomodoros,
-            done: pomodoroState.todo.done),
-        state: pomodoroState.state,
-        secondsLeft: pomodoroState.secondsLeft,
-        running: pomodoroState.running,
-        pomodoroCount: pomodoroState.pomodoroCount);
+      todo: Todo(
+          taskName: pomodoroState.todo.taskName,
+          estimatedPomodoros: pomodoroState.todo.estimatedPomodoros,
+          finishedPomodoros: pomodoroState.todo.finishedPomodoros,
+          done: pomodoroState.todo.done,
+          todoKey: pomodoroState.todo.todoKey),
+      state: pomodoroState.state,
+      secondsLeft: pomodoroState.secondsLeft,
+      running: pomodoroState.running,
+      pomodoroCount: pomodoroState.pomodoroCount,
+    );
     if (pomodoroState.state == "pomodoro") {
       nextState.secondsLeft = 1500;
     } else if (pomodoroState.state == "long_break") {
@@ -167,6 +174,9 @@ class _MainScreenBodyState extends State<MainScreenBody> {
             timer.cancel();
             pomodoroState =
                 pushPomodoroState(setNextPomodoroState(pomodoroState));
+            pomodoroState.todo.finishedPomodoros++;
+            pushPomodoroState(pomodoroState);
+            todoBox.put(pomodoroState.todo.todoKey, pomodoroState.todo);
           }
         });
       });

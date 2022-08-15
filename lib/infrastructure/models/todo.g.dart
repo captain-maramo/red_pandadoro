@@ -21,13 +21,14 @@ class TodoAdapter extends TypeAdapter<Todo> {
       estimatedPomodoros: fields[1] as int,
       finishedPomodoros: fields[2] as int,
       done: fields[3] as bool,
+      todoKey: fields[4] as dynamic,
     );
   }
 
   @override
   void write(BinaryWriter writer, Todo obj) {
     writer
-      ..writeByte(4)
+      ..writeByte(5)
       ..writeByte(0)
       ..write(obj.taskName)
       ..writeByte(1)
@@ -35,7 +36,9 @@ class TodoAdapter extends TypeAdapter<Todo> {
       ..writeByte(2)
       ..write(obj.finishedPomodoros)
       ..writeByte(3)
-      ..write(obj.done);
+      ..write(obj.done)
+      ..writeByte(4)
+      ..write(obj.todoKey);
   }
 
   @override

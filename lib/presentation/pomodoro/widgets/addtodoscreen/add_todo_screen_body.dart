@@ -29,12 +29,16 @@ class AddTodoScreenBody extends StatelessWidget {
           ], // Only numbers can be entered
         ),
         TextButton(
-          onPressed: () {
-            todoBox.add(Todo(
+          onPressed: () async {
+            int newkey = await todoBox.add(Todo(
                 taskName: taskNameController.text,
                 estimatedPomodoros: int.parse(pomodoroNumberController.text),
                 finishedPomodoros: 0,
-                done: false));
+                done: false,
+                todoKey: "placeholder"));
+            Todo newTodo = todoBox.get(newkey);
+            newTodo.todoKey = newkey;
+            todoBox.put(newkey, newTodo);
             Navigator.of(context).pop();
           },
           child: Text(

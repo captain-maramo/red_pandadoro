@@ -32,7 +32,7 @@ class _TodoListScreenToDoFieldState extends State<TodoListScreenToDoField> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsetsDirectional.only(top: 16.0),
+      padding: const EdgeInsetsDirectional.only(top: 16.0, start: 16.0),
       child: Container(
         child: SizedBox(
           height: 120,
