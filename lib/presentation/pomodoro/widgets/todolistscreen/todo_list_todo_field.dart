@@ -33,71 +33,105 @@ class _TodoListScreenToDoFieldState extends State<TodoListScreenToDoField> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsetsDirectional.only(top: 16.0, start: 16.0),
-      child: Container(
-        child: SizedBox(
-          height: 120,
-          width: 500,
-          child: Row(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 30.0),
-                child: Material(
-                  elevation: 16,
-                  child: Container(
-                    decoration: BoxDecoration(
-                        color: widget.themeData.colorScheme.secondary,
-                        borderRadius: BorderRadius.circular(8)),
-                    child: SizedBox(
-                      height: 120,
-                      width: 200,
-                      child: Stack(
-                        children: [
-                          Center(
-                            child: TextButton(
-                              onPressed: () {
-                                PomodoroState actualstate = widget
-                                    .pomodoroStateBox
-                                    .get("pomodoroState");
-                                actualstate.todo = widget.todo;
-                                widget.pomodoroStateBox
-                                    .put("pomodoroState", actualstate);
-                                widget.notifyParent();
-                                Navigator.of(context)
-                                    .popUntil((route) => route.isFirst);
-                              },
-                              child: Text(
-                                widget.todo.taskName,
-                                textAlign: TextAlign.center,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .button
-                                    ?.copyWith(fontSize: 36),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding:
-                                const EdgeInsets.only(left: 170.0, top: 100),
+      child: SizedBox(
+        height: 120,
+        width: 500,
+        child: Row(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(left: 30.0),
+              child: Material(
+                elevation: 16,
+                child: Container(
+                  decoration: BoxDecoration(
+                      color: widget.themeData.colorScheme.secondary,
+                      borderRadius: BorderRadius.circular(8)),
+                  child: SizedBox(
+                    height: 120,
+                    width: 200,
+                    child: Stack(
+                      children: [
+                        Center(
+                          child: TextButton(
+                            onPressed: () {
+                              PomodoroState actualstate =
+                                  widget.pomodoroStateBox.get("pomodoroState");
+                              actualstate.todo = widget.todo;
+                              widget.pomodoroStateBox
+                                  .put("pomodoroState", actualstate);
+                              widget.notifyParent();
+                              Navigator.of(context)
+                                  .popUntil((route) => route.isFirst);
+                            },
                             child: Text(
-                              "${widget.todo.finishedPomodoros}/${widget.todo.estimatedPomodoros}",
+                              widget.todo.taskName,
                               textAlign: TextAlign.center,
                               style: Theme.of(context)
                                   .textTheme
                                   .button
-                                  ?.copyWith(fontSize: 15),
+                                  ?.copyWith(fontSize: 36),
                             ),
                           ),
-                        ],
-                      ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 170.0, top: 100),
+                          child: Text(
+                            "${widget.todo.finishedPomodoros}/${widget.todo.estimatedPomodoros}",
+                            textAlign: TextAlign.center,
+                            style: Theme.of(context)
+                                .textTheme
+                                .button
+                                ?.copyWith(fontSize: 15),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 5),
-                child: Column(
-                  children: [
-                    Material(
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 5),
+              child: Column(
+                children: [
+                  Material(
+                    elevation: 16,
+                    child: Container(
+                      decoration: BoxDecoration(
+                          color: widget.themeData.colorScheme.secondary,
+                          borderRadius: BorderRadius.circular(8)),
+                      child: SizedBox(
+                        height: 58,
+                        width: 95,
+                        child: IconButton(
+                          icon: const Icon(Icons.check_outlined),
+                          iconSize: 55,
+                          onPressed: () {
+                            widget.todo.done = !widget.todo.done;
+                            widget.todoBox.put(widget.todoKey, widget.todo);
+                            widget.pomodoroStateBox.put(
+                                'pomodoroState',
+                                PomodoroState(
+                                  todo: Todo(
+                                      taskName: "",
+                                      estimatedPomodoros: 4,
+                                      finishedPomodoros: 2,
+                                      done: false,
+                                      todoKey: -1),
+                                  state: "pomodoro",
+                                  secondsLeft: 10,
+                                  running: false,
+                                  pomodoroCount: 2,
+                                ));
+                            widget.notifyParent();
+                          },
+                        ),
+                      ),
+                    ),
+                  ),
+                  Spacer(),
+                  Center(
+                    child: Material(
                       elevation: 16,
                       child: Container(
                         decoration: BoxDecoration(
@@ -107,91 +141,66 @@ class _TodoListScreenToDoFieldState extends State<TodoListScreenToDoField> {
                           height: 58,
                           width: 95,
                           child: IconButton(
-                            icon: const Icon(Icons.check_outlined),
-                            iconSize: 55,
-                            onPressed: () {
-                              widget.todo.done = !widget.todo.done;
-                              widget.todoBox.put(widget.todoKey, widget.todo);
-                              widget.notifyParent();
-                            },
-                          ),
-                        ),
-                      ),
-                    ),
-                    Spacer(),
-                    Center(
-                      child: Material(
-                        elevation: 16,
-                        child: Container(
-                          decoration: BoxDecoration(
-                              color: widget.themeData.colorScheme.secondary,
-                              borderRadius: BorderRadius.circular(8)),
-                          child: SizedBox(
-                            height: 58,
-                            width: 95,
-                            child: IconButton(
-                              onPressed: () => showDialog<String>(
-                                context: context,
-                                builder: (BuildContext context) => AlertDialog(
-                                  title: const Text('AlertDialog Title'),
-                                  content:
-                                      const Text('AlertDialog description'),
-                                  actions: <Widget>[
-                                    TextButton(
-                                      onPressed: () {
-                                        widget.todoBox.delete(widget.todoKey);
-                                        widget.notifyParent();
-                                        Navigator.pop(context, 'Delete');
-                                      },
-                                      child: Text(
-                                        'Delete',
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .button
-                                            ?.copyWith(fontSize: 20),
-                                      ),
+                            onPressed: () => showDialog<String>(
+                              context: context,
+                              builder: (BuildContext context) => AlertDialog(
+                                title: const Text('AlertDialog Title'),
+                                content: const Text('AlertDialog description'),
+                                actions: <Widget>[
+                                  TextButton(
+                                    onPressed: () {
+                                      widget.todoBox.delete(widget.todoKey);
+                                      widget.notifyParent();
+                                      Navigator.pop(context, 'Delete');
+                                    },
+                                    child: Text(
+                                      'Delete',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .button
+                                          ?.copyWith(fontSize: 20),
                                     ),
-                                    TextButton(
-                                      onPressed: () {
-                                        Navigator.pop(context, 'Edit');
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  EditTodoScreen(
-                                                    title: 'Red Pandadoro',
-                                                    todoBox: widget.todoBox,
-                                                    todokey: widget.todoKey,
-                                                    notifyParent:
-                                                        widget.notifyParent,
-                                                    pomodoroStateBox:
-                                                        widget.pomodoroStateBox,
-                                                  )),
-                                        );
-                                      },
-                                      child: Text(
-                                        'Edit',
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .button
-                                            ?.copyWith(fontSize: 20),
-                                      ),
+                                  ),
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.pop(context, 'Edit');
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                EditTodoScreen(
+                                                  title: 'Red Pandadoro',
+                                                  todoBox: widget.todoBox,
+                                                  todokey: widget.todoKey,
+                                                  notifyParent:
+                                                      widget.notifyParent,
+                                                  pomodoroStateBox:
+                                                      widget.pomodoroStateBox,
+                                                )),
+                                      );
+                                    },
+                                    child: Text(
+                                      'Edit',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .button
+                                          ?.copyWith(fontSize: 20),
                                     ),
-                                  ],
-                                ),
+                                  ),
+                                ],
                               ),
-                              icon: const Icon(Icons.more_vert),
-                              iconSize: 55,
                             ),
+                            icon: const Icon(Icons.more_vert),
+                            iconSize: 55,
                           ),
                         ),
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

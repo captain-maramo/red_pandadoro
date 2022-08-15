@@ -42,6 +42,171 @@ class _MainScreenToDoFieldState extends State<MainScreenToDoField> {
     }
   }
 
+  Widget stateBasedToDoField() {
+    if ((widget.state == "pomodoro" &&
+            stateBasedTextSwitch() == "Click to choose task") ||
+        widget.state != "pomodoro") {
+      return Padding(
+        padding: const EdgeInsetsDirectional.all(16.0),
+        child: Material(
+          elevation: 16,
+          child: Container(
+            decoration: BoxDecoration(
+                color: widget.themeData.colorScheme.secondary,
+                borderRadius: BorderRadius.circular(8)),
+            child: SizedBox(
+              height: 120,
+              width: 300,
+              child: Center(
+                child: TextButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => TodoListScreen(
+                                title: 'Red Pandadoro',
+                                todoBox: widget.todoBox,
+                                pomodoroStateBox: widget.pomodoroStateBox,
+                              )),
+                    );
+                  },
+                  child: Text(
+                    stateBasedTextSwitch(),
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context)
+                        .textTheme
+                        .button
+                        ?.copyWith(fontSize: 36),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+      );
+    } else {
+      PomodoroState todo = widget.pomodoroStateBox.get("pomodoroState");
+      return Padding(
+        padding: const EdgeInsetsDirectional.all(16.0),
+        child: SizedBox(
+          height: 120,
+          width: 500,
+          child: Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 30.0),
+                child: Material(
+                  elevation: 16,
+                  child: Container(
+                    decoration: BoxDecoration(
+                        color: widget.themeData.colorScheme.secondary,
+                        borderRadius: BorderRadius.circular(8)),
+                    child: SizedBox(
+                      height: 120,
+                      width: 200,
+                      child: Center(
+                        child: TextButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => TodoListScreen(
+                                        title: 'Red Pandadoro',
+                                        todoBox: widget.todoBox,
+                                        pomodoroStateBox:
+                                            widget.pomodoroStateBox,
+                                      )),
+                            );
+                          },
+                          child: Text(
+                            stateBasedTextSwitch(),
+                            textAlign: TextAlign.center,
+                            style: Theme.of(context)
+                                .textTheme
+                                .button
+                                ?.copyWith(fontSize: 36),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 5),
+                child: Column(
+                  children: [
+                    Material(
+                      elevation: 16,
+                      child: Container(
+                        decoration: BoxDecoration(
+                            color: widget.themeData.colorScheme.secondary,
+                            borderRadius: BorderRadius.circular(8)),
+                        child: SizedBox(
+                          height: 58,
+                          width: 95,
+                          child: IconButton(
+                            icon: const Icon(Icons.check_outlined),
+                            iconSize: 55,
+                            onPressed: () {
+                              PomodoroState todo =
+                                  widget.pomodoroStateBox.get("pomodoroState");
+                              todo.todo.done = !todo.todo.done;
+                              widget.todoBox.put(todo.todo.todoKey, todo.todo);
+                              widget.pomodoroStateBox.put(
+                                  'pomodoroState',
+                                  PomodoroState(
+                                    todo: Todo(
+                                        taskName: "",
+                                        estimatedPomodoros: 4,
+                                        finishedPomodoros: 2,
+                                        done: false,
+                                        todoKey: -1),
+                                    state: "pomodoro",
+                                    secondsLeft: 10,
+                                    running: false,
+                                    pomodoroCount: 2,
+                                  ));
+                            },
+                          ),
+                        ),
+                      ),
+                    ),
+                    Spacer(),
+                    Center(
+                      child: Material(
+                        elevation: 16,
+                        child: Container(
+                          decoration: BoxDecoration(
+                              color: widget.themeData.colorScheme.secondary,
+                              borderRadius: BorderRadius.circular(8)),
+                          child: SizedBox(
+                            height: 58,
+                            width: 95,
+                            child: Center(
+                              child: Text(
+                                "${todo.todo.finishedPomodoros}/${todo.todo.estimatedPomodoros}",
+                                textAlign: TextAlign.center,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .button
+                                    ?.copyWith(fontSize: 36),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
+  }
+
   refresh() {
     setState(() {});
   }
@@ -51,44 +216,7 @@ class _MainScreenToDoFieldState extends State<MainScreenToDoField> {
     return ValueListenableBuilder(
         valueListenable: widget.pomodoroStateBox.listenable(),
         builder: (context, box, child) {
-          return Padding(
-            padding: const EdgeInsetsDirectional.all(16.0),
-            child: Material(
-              elevation: 16,
-              child: Container(
-                decoration: BoxDecoration(
-                    color: widget.themeData.colorScheme.secondary,
-                    borderRadius: BorderRadius.circular(8)),
-                child: SizedBox(
-                  height: 120,
-                  width: 300,
-                  child: Center(
-                    child: TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => TodoListScreen(
-                                    title: 'Red Pandadoro',
-                                    todoBox: widget.todoBox,
-                                    pomodoroStateBox: widget.pomodoroStateBox,
-                                  )),
-                        );
-                      },
-                      child: Text(
-                        stateBasedTextSwitch(),
-                        textAlign: TextAlign.center,
-                        style: Theme.of(context)
-                            .textTheme
-                            .button
-                            ?.copyWith(fontSize: 36),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          );
+          return stateBasedToDoField();
         });
   }
 }

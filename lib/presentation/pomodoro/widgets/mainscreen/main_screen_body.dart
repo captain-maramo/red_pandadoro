@@ -174,9 +174,11 @@ class _MainScreenBodyState extends State<MainScreenBody> {
             timer.cancel();
             pomodoroState =
                 pushPomodoroState(setNextPomodoroState(pomodoroState));
-            pomodoroState.todo.finishedPomodoros++;
-            pushPomodoroState(pomodoroState);
-            todoBox.put(pomodoroState.todo.todoKey, pomodoroState.todo);
+            if (pomodoroState.state != "pomodoro") {
+              pomodoroState.todo.finishedPomodoros++;
+              pushPomodoroState(pomodoroState);
+              todoBox.put(pomodoroState.todo.todoKey, pomodoroState.todo);
+            }
           }
         });
       });
