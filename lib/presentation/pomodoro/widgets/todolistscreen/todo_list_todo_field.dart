@@ -146,8 +146,7 @@ class _TodoListScreenToDoFieldState extends State<TodoListScreenToDoField> {
                             onPressed: () => showDialog<String>(
                               context: context,
                               builder: (BuildContext context) => AlertDialog(
-                                title: const Text('AlertDialog Title'),
-                                content: const Text('AlertDialog description'),
+                                title: const Text('Edit or delete?'),
                                 actions: <Widget>[
                                   TextButton(
                                     onPressed: () {
