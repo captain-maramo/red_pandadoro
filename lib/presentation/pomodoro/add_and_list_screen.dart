@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:red_pandadoro/main.dart';
 import 'package:red_pandadoro/presentation/pomodoro/todo_list_screen.dart';
-import 'package:red_pandadoro/presentation/pomodoro/widgets/addtodoscreen/add_todo_screen_body.dart';
 
 import '../../infrastructure/models/pomodoro_state.dart';
 import 'add_todo_screen.dart';
 import 'finished_todo_screen.dart';
 import 'widgets/menu_drawer.dart';
 
+// ignore: must_be_immutable
 class AddAndListScreen extends StatefulWidget {
   AddAndListScreen(
       {Key? key,
@@ -60,7 +60,6 @@ class _AddAndListScreenState extends State<AddAndListScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final themeData = Theme.of(context);
     PomodoroState pomodoroState = widget.pomodoroStateBox.get("pomodoroState");
 
     return Scaffold(
@@ -83,7 +82,7 @@ class _AddAndListScreenState extends State<AddAndListScreen> {
               label: 'List',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.school),
+              icon: Icon(Icons.checklist),
               label: 'Done',
             ),
           ],

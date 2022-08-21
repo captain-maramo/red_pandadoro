@@ -143,15 +143,19 @@ class _MainScreenBodyState extends State<MainScreenBody> {
     }
   }
 
+  bool buttonNameIsAButton(String buttonName) {
+    return (buttonName == "start_pause" ||
+        buttonName == "rewind" ||
+        buttonName == "forward");
+  }
+
   refresh() {
     PomodoroState pomodoroState = widget.pomodoroStateBox.get("pomodoroState");
     LastButtonPressed lastButtonPressed =
         widget.lastButtonPressedBox.get("lastButtonPressed");
     String buttonName = lastButtonPressed.buttonName;
 
-    if (buttonName == "start_pause" ||
-        buttonName == "rewind" ||
-        buttonName == "forward") {
+    if (buttonNameIsAButton(buttonName)) {
       pomodoroState.running = !pomodoroState.running;
       Timer.periodic(const Duration(seconds: 1), (Timer timer) {
         setState(() {
@@ -170,8 +174,8 @@ class _MainScreenBodyState extends State<MainScreenBody> {
               pomodoroState = pushPomodoroState(pausePomodoro(pomodoroState));
             }
           } else {
-            pomodoroState.running = !pomodoroState.running;
             timer.cancel();
+            pomodoroState.running = !pomodoroState.running;
             pomodoroState =
                 pushPomodoroState(setNextPomodoroState(pomodoroState));
             if (pomodoroState.state != "pomodoro") {

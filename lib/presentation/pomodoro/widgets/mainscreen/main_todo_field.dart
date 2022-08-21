@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:red_pandadoro/infrastructure/models/pomodoro_state.dart';
-import 'package:red_pandadoro/main.dart';
-import 'package:red_pandadoro/presentation/pomodoro/todo_list_screen.dart';
 
 import '../../../../infrastructure/models/todo.dart';
 import '../../add_and_list_screen.dart';
@@ -203,7 +201,7 @@ class _MainScreenToDoFieldState extends State<MainScreenToDoField> {
                         ),
                       ),
                     ),
-                    Spacer(),
+                    const Spacer(),
                     Center(
                       child: Material(
                         elevation: 16,

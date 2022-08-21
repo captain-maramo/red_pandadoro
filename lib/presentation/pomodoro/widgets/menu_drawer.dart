@@ -2,11 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
 import 'package:red_pandadoro/presentation/pomodoro/add_and_list_screen.dart';
-import 'package:red_pandadoro/presentation/pomodoro/add_todo_screen.dart';
-import 'package:red_pandadoro/presentation/pomodoro/finished_todo_screen.dart';
 
 import '../../../application/theme/theme_service.dart';
-import '../todo_list_screen.dart';
 
 class MenuDrawer extends StatefulWidget {
   const MenuDrawer(

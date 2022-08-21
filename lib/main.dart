@@ -16,8 +16,6 @@ late Box todoBox;
 late Box pomodoroStateBox;
 late Box lastButtonPressedBox;
 
-void testDataToBox() {}
-
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await di.init();

@@ -39,6 +39,7 @@ class AddTodoScreenBody extends StatelessWidget {
             Todo newTodo = todoBox.get(newkey);
             newTodo.todoKey = newkey;
             todoBox.put(newkey, newTodo);
+            // ignore: use_build_context_synchronously
             Navigator.of(context).pop();
           },
           child: Text(

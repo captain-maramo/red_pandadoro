@@ -101,7 +101,7 @@ class _FinishedTodoListScreenToDoFieldState
                       ),
                     ),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   Center(
                     child: Material(
                       elevation: 16,
